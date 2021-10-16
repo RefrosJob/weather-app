@@ -23,5 +23,5 @@ jobs:
     - name: Build
       run: |
         npm i
-        npx run build --if-present
+        npm run build --if-present
         npm test
