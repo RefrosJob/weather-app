@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppPage } from '../../pages/MainPage/MainPage';
 
 interface Props {
     routes: { path: string; component: JSX.Element }[];

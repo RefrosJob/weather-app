@@ -1,4 +1,4 @@
-export interface WeatherByCity {
+export interface CurrentWeatherByCity {
     location: Location;
     current: Current;
 }

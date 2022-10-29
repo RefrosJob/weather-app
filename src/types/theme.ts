@@ -5,6 +5,17 @@ export interface DefaultTheme {
     font: string;
 }
 
+export interface UseTheme {
+    theme: DefaultTheme;
+    themeLoaded: boolean;
+    setMode: (mode: DefaultTheme) => void;
+    getFonts: () => string[];
+}
+
+export interface FullTheme {
+    data: { [themeName: string]: DefaultTheme };
+}
+
 interface Colors {
     body: string;
     text: string;

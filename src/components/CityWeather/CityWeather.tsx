@@ -1,22 +1,21 @@
-import { Card, Col, Input, Row, Space, Typography } from 'antd';
-import Title from 'antd/lib/skeleton/Title';
+import { Card, Col, Input, Row, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getWeatherByCity } from '../../services/weatherApi';
-import { WeatherByCity } from '../../types/weather';
+import { getCurrentCurrentWeatherByCity } from '../../services/weatherApi';
+import { CurrentWeatherByCity } from '../../types/weather';
 import { Wrapper } from './style';
 
 export function CityWeather(): JSX.Element {
     const { Title } = Typography;
 
     const [city, setCity] = useState('');
-    const [weather, setWeather] = useState({} as WeatherByCity);
+    const [weather, setWeather] = useState({} as CurrentWeatherByCity);
 
     useEffect(() => {
         handleInput();
     }, [city]);
 
     async function handleInput() {
-        const weather = await getWeatherByCity(city);
+        const weather = await getCurrentCurrentWeatherByCity(city);
         if (weather.location) {
             setWeather(weather);
         }

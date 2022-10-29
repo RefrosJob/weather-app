@@ -1,10 +1,7 @@
-import { CloudOutlined } from '@ant-design/icons';
-import { Button, Input, Layout, Menu, Space, Typography } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Layout } from 'antd';
+import React from 'react';
 import { AppHeader } from '../../components/AppHeader/AppHeader';
 import { CityWeather } from '../../components/CityWeather/CityWeather';
-import { getWeatherByCity } from '../../services/weatherApi';
-import { WeatherByCity, WeatherError } from '../../types/weather';
 import { Wrapper } from './style';
 
 export function AppPage(): JSX.Element {
