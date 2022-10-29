@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getCurrentCurrentWeatherByCity } from '../../services/weatherApi';
 import { CurrentWeatherByCity } from '../../types/weather';
 import { Wrapper } from './style';
+import { WeatherInput } from './WeatherInput/WeatherInput';
 
 export function CityWeather(): JSX.Element {
     const { Title } = Typography;
@@ -23,11 +24,11 @@ export function CityWeather(): JSX.Element {
     return (
         <Wrapper>
             <Row>
-                <Input
-                    placeholder='Enter City Name'
+                <WeatherInput
                     onChange={(e) => {
-                        setCity(e.target.value);
+                        setCity(e);
                     }}
+                    className='weather-current-input full-width'
                 />
             </Row>
             <Row className='city-weather-report-body'>

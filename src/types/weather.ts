@@ -10,6 +10,8 @@ export interface WeatherError {
     };
 }
 
+export type AutoComplete = Location[];
+
 interface Location {
     name: string;
     region: string;
