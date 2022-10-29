@@ -10,8 +10,10 @@ export function useTheme(): UseTheme {
 
     useEffect(() => {
         const localTheme = getFromLS<DefaultTheme>('theme');
-        if (localTheme) {
-            localTheme ? setTheme(localTheme) : setTheme(themes.data.dark);
+        if (localTheme?.colors) {
+            setTheme(localTheme);
+        } else {
+            setTheme(themes.data.dark);
         }
         setThemeLoaded(true);
     }, []);
