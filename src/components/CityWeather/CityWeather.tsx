@@ -1,52 +1,31 @@
-import { Card, Col, Input, Row, Typography } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { getCurrentCurrentWeatherByCity } from '../../services/weatherApi';
-import { CurrentWeatherByCity } from '../../types/weather';
+import { Row } from 'antd';
+import React, { useState } from 'react';
+import { CityWeatherCard } from './Card/CityWeatherCard';
+import { WeatherInput } from './Input/CityWeatherInput';
 import { Wrapper } from './style';
-import { WeatherInput } from './WeatherInput/WeatherInput';
+import UiCard from '../UI/Card/UICard';
 
 export function CityWeather(): JSX.Element {
-    const { Title } = Typography;
-
     const [city, setCity] = useState('');
-    const [weather, setWeather] = useState({} as CurrentWeatherByCity);
 
-    useEffect(() => {
-        handleInput();
-    }, [city]);
-
-    async function handleInput() {
-        const weather = await getCurrentCurrentWeatherByCity(city);
-        if (weather.location) {
-            setWeather(weather);
-        }
-    }
     return (
         <Wrapper>
-            <Row>
-                <WeatherInput
-                    onChange={(e) => {
-                        setCity(e);
-                    }}
-                    className='weather-current-input full-width'
-                />
-            </Row>
-            <Row className='city-weather-report-body'>
-                <Col span={12}>
-                    <Card className='full-width'>
-                        <Title level={3}>Location</Title>
-                        <Title level={4}>
-                            {weather?.location?.country || NaN}, {weather?.location?.name || NaN}
-                        </Title>
-                    </Card>
-                </Col>
-                <Col span={12}>
-                    <Card className='full-width'>
-                        <Title level={3}>Current Weather</Title>
-                        <Title level={4}>{weather?.current?.temp_c || NaN}°</Title>
-                    </Card>
-                </Col>
-            </Row>
+            <UiCard className={`weather-main-card ${city && 'weather-grow'}`}>
+                <Row>
+                    <WeatherInput
+                        onChange={(e) => {
+                            setCity(e);
+                        }}
+                        className='full-width'
+                        inputClassName='weather-current-input'
+                    />
+                </Row>
+                <>
+                    <Row className={city && 'city-weather-report-body'}>
+                        <CityWeatherCard city={city} />
+                    </Row>
+                </>
+            </UiCard>
         </Wrapper>
     );
 }

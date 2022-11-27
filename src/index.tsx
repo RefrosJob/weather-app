@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import '@fontsource/roboto/300.css';
@@ -9,12 +8,15 @@ import '@fontsource/roboto/700.css';
 
 import themes from './themes/schema.json';
 import { setToLS } from './microservices/storage';
+import { createRoot } from 'react-dom/client';
 
 setToLS('all-themes', themes);
+const container = document.getElementById('root');
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!);
 
-ReactDOM.render(
+root.render(
     <React.StrictMode>
         <App />
     </React.StrictMode>,
-    document.getElementById('root'),
 );

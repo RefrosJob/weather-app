@@ -22,7 +22,8 @@
         "quotes": ["error", "single"],
         "no-duplicate-imports": "error",
         "prettier/prettier": ["error", { "endOfLine": "auto", "semi": true }],
-        "semi": ["error", "always"]
+        "semi": ["error", "always"],
+        "typescript-eslint/explicit-module-boundary-types": "off"
     },
     "settings": {
         "import/resolver": {

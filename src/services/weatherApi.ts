@@ -1,13 +1,32 @@
 import { notification } from 'antd';
-import { AutoComplete, CurrentWeatherByCity } from '../types/weather';
+import { AutoComplete, CurrentWeatherByCity, DailyWeatherByCity } from '../types/weather';
 import { HttpGet } from './api';
 
 const apiKey = '93b41cd7ba28460c89e184507212011';
 
-export async function getCurrentCurrentWeatherByCity(city: string): Promise<CurrentWeatherByCity> {
+export async function getWeatherByCity(city: string): Promise<CurrentWeatherByCity> {
+    console.log('getWeatherByCity');
     let result = {} as CurrentWeatherByCity;
     try {
         result = await HttpGet<CurrentWeatherByCity>(
+            `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no}`,
+        );
+    } catch (e) {
+        console.log('HttpGet, ', e);
+        notification.open({
+            description: 'HttpGet, ' + e,
+            message: 'Request Error',
+        });
+    }
+
+    return result;
+}
+
+export async function getDailyWeatherByCity(city: string): Promise<DailyWeatherByCity> {
+    // TODO: change request to weather forecast, interfaces are ready
+    let result = {} as DailyWeatherByCity;
+    try {
+        result = await HttpGet<DailyWeatherByCity>(
             `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no}`,
         );
     } catch (e) {
