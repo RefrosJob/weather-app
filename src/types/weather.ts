@@ -4,7 +4,7 @@ export interface CurrentWeatherByCity {
 }
 
 export interface DailyWeatherByCity extends CurrentWeatherByCity {
-    forecast: Forecast[];
+    forecast: Forecast;
 }
 
 export interface Forecast {
@@ -14,7 +14,7 @@ export interface Forecast {
 export interface ForecastDay {
     date: string;
     date_epoch: number;
-    day: Day[];
+    day: Day;
     astro: astro;
     hour: Hour[];
 }
@@ -137,3 +137,11 @@ interface Condition {
     icon: string;
     code: number;
 }
+
+type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
+    ? Acc[number]
+    : Enumerate<N, [...Acc, Acc['length']]>;
+
+type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>;
+
+export type DayRange = IntRange<1, 10>;

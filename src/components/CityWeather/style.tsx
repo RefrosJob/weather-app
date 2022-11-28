@@ -50,7 +50,10 @@ export const Wrapper = styled.div`
         min-height: 4rem;
         font-size: 1rem;
         border-radius: 0.6rem;
-        box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.1);
+        input {
+            background-color: rgba(0, 0, 0, 0.01);
+        }
     }
 
     .weather-grow {

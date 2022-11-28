@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-import { AutoComplete, CurrentWeatherByCity, DailyWeatherByCity } from '../types/weather';
+import { AutoComplete, CurrentWeatherByCity, DailyWeatherByCity, DayRange } from '../types/weather';
 import { HttpGet } from './api';
 
 const apiKey = '93b41cd7ba28460c89e184507212011';
@@ -22,12 +22,14 @@ export async function getWeatherByCity(city: string): Promise<CurrentWeatherByCi
     return result;
 }
 
-export async function getDailyWeatherByCity(city: string): Promise<DailyWeatherByCity> {
-    // TODO: change request to weather forecast, interfaces are ready
+export async function getDailyWeatherByCity(
+    city: string,
+    days: DayRange,
+): Promise<DailyWeatherByCity> {
     let result = {} as DailyWeatherByCity;
     try {
         result = await HttpGet<DailyWeatherByCity>(
-            `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no}`,
+            `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no`,
         );
     } catch (e) {
         console.log('HttpGet, ', e);

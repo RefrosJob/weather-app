@@ -1,7 +1,7 @@
 import { Card, Col, Row, Skeleton, Spin, Tabs, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getWeatherByCity } from '../../../services/weatherApi';
-import { CurrentWeatherByCity } from '../../../types/weather';
+import { getDailyWeatherByCity } from '../../../services/weatherApi';
+import { DailyWeatherByCity } from '../../../types/weather';
 
 interface Props {
     city?: string;
@@ -11,7 +11,7 @@ const { Title } = Typography;
 
 export function CityWeatherCard({ city }: Props): JSX.Element {
     const [isLoading, setIsLoading] = useState(false);
-    const [weather, setWeather] = useState({} as CurrentWeatherByCity);
+    const [dailyWeather, setDailyWeather] = useState({} as DailyWeatherByCity);
 
     useEffect(() => {
         const initComponent = async () => {
@@ -22,15 +22,17 @@ export function CityWeatherCard({ city }: Props): JSX.Element {
 
     async function init() {
         setIsLoading(true);
-        console.log('city: ', city);
         if (city) {
-            console.log('city: ', city);
-            const weather = await getWeatherByCity(city);
-            if (weather.location) {
-                setWeather(weather);
+            // NOTE: Free API plan doesn't allow for forecasts longer than 3 days;
+            const dailyWeatherResponse = await getDailyWeatherByCity(city, 3);
+            console.log('daily weather: ', dailyWeatherResponse);
+            if (dailyWeatherResponse.location && dailyWeatherResponse.forecast.forecastday.length) {
+                setDailyWeather(dailyWeatherResponse);
+                setIsLoading(false);
             }
+        } else {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     }
     if (!city) {
         return <></>;
@@ -46,27 +48,38 @@ export function CityWeatherCard({ city }: Props): JSX.Element {
             </Row>
         );
     }
+
+    // TODO: Populate the fields: Hourly chart with selections
+
     return (
         <>
             <Card className='full-width weather-card-fade-in'>
                 <Tabs tabPosition='left'>
-                    <Tabs.TabPane tab='Tab 1' key='1'>
-                        <Col span={12}>
-                            <Card className='full-width'>
-                                <Title level={3}>Location</Title>
-                                <Title level={4}>
-                                    {weather?.location?.country || NaN},{' '}
-                                    {weather?.location?.name || NaN}
-                                </Title>
-                            </Card>
-                        </Col>
-                        <Col span={12}>
-                            <Card className='full-width'>
-                                <Title level={3}>Current Weather</Title>
-                                <Title level={4}>{weather?.current?.temp_c || NaN}°</Title>
-                            </Card>
-                        </Col>
-                    </Tabs.TabPane>
+                    {dailyWeather?.forecast?.forecastday.map((forecastDay) => {
+                        if (forecastDay) {
+                            return (
+                                <Tabs.TabPane tab={forecastDay.date} key={forecastDay.date}>
+                                    <Col span={12}>
+                                        <Card className='full-width'>
+                                            <Title level={3}>Location</Title>
+                                            <Title level={4}>
+                                                {dailyWeather?.location?.country || NaN},{' '}
+                                                {dailyWeather?.location?.name || NaN}
+                                            </Title>
+                                        </Card>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Card className='full-width'>
+                                            <Title level={3}>Average Temp</Title>
+                                            <Title level={4}>
+                                                {forecastDay.day.avgtemp_c || NaN}°
+                                            </Title>
+                                        </Card>
+                                    </Col>
+                                </Tabs.TabPane>
+                            );
+                        }
+                    })}
                 </Tabs>
             </Card>
         </>

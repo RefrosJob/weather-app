@@ -55,11 +55,11 @@ export function WeatherInput({
             onSearch={setIsLoading ? handleSearchWithLoading : handleSearch}
             className={className}
             filterOption
+            allowClear
         >
             <Input
                 placeholder='Enter City Name'
                 className={inputClassName}
-                allowClear
                 prefix={<SearchOutlined />}
             />
         </AutoComplete>
