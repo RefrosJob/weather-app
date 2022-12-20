@@ -28,4 +28,8 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
 export const Wrapper = styled.div`
     height: 100%;
     width: 100%;
+
+    .ant-layout-header {
+        padding: 0 2rem 0 2rem;
+    }
 `;

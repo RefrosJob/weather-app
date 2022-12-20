@@ -6,7 +6,8 @@ import { AppRouter } from './components/AppRouter/AppRouter';
 import { AppRoutes } from './types/appRouter';
 import { useTheme } from './microservices/theme';
 import { ThemeProvider } from 'styled-components';
-
+import { Provider } from 'react-redux';
+import store from './store';
 function App(): JSX.Element {
     const routes: AppRoutes = [{ path: '/', component: <AppPage /> }];
     const { theme, themeLoaded } = useTheme();
@@ -20,10 +21,12 @@ function App(): JSX.Element {
         <>
             {themeLoaded && (
                 <ThemeProvider theme={selectedTheme}>
-                    <GlobalStyles />
-                    <Wrapper>
-                        <AppRouter routes={routes} />
-                    </Wrapper>
+                    <Provider store={store}>
+                        <GlobalStyles />
+                        <Wrapper>
+                            <AppRouter routes={routes} />
+                        </Wrapper>
+                    </Provider>
                 </ThemeProvider>
             )}
         </>

@@ -5,7 +5,7 @@ import { CityWeather } from '../../components/CityWeather/CityWeather';
 import { Wrapper } from './style';
 
 export function AppPage(): JSX.Element {
-    const { Header, Content, Footer } = Layout;
+    const { Header, Content } = Layout;
 
     return (
         <Wrapper>
@@ -16,7 +16,6 @@ export function AppPage(): JSX.Element {
                 <Content className='app-content'>
                     <CityWeather />
                 </Content>
-                <Footer className='app-footer'></Footer>
             </Layout>
         </Wrapper>
     );

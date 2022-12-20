@@ -138,6 +138,13 @@ interface Condition {
     code: number;
 }
 
+export type Format = FormatTypes.Celcius | FormatTypes.Fahrenheit;
+
+export enum FormatTypes {
+    Celcius = 'Celcius',
+    Fahrenheit = 'Fahrenheit',
+}
+
 type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
     ? Acc[number]
     : Enumerate<N, [...Acc, Acc['length']]>;

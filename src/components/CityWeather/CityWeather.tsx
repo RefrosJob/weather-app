@@ -1,4 +1,4 @@
-import { Row } from 'antd';
+import { Row, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { CityWeatherCard } from './Card/CityWeatherCard';
 import { WeatherInput } from './Input/CityWeatherInput';
@@ -21,9 +21,11 @@ export function CityWeather(): JSX.Element {
                     />
                 </Row>
                 <>
-                    <Row className={city && 'city-weather-report-body'}>
-                        <CityWeatherCard city={city} />
-                    </Row>
+                    {city && (
+                        <Row>
+                            <CityWeatherCard city={city} />
+                        </Row>
+                    )}
                 </>
             </UiCard>
         </Wrapper>
