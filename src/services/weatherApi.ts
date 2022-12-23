@@ -5,7 +5,6 @@ import { HttpGet } from './api';
 const apiKey = '93b41cd7ba28460c89e184507212011';
 
 export async function getWeatherByCity(city: string): Promise<CurrentWeatherByCity> {
-    console.log('getWeatherByCity');
     let result = {} as CurrentWeatherByCity;
     try {
         result = await HttpGet<CurrentWeatherByCity>(

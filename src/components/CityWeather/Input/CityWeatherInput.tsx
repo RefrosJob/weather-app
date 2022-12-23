@@ -22,37 +22,36 @@ export function WeatherInput({
 }: Props): JSX.Element {
     const [options, setOptions] = useState([] as Options);
 
-    async function handleSearchWithLoading(searchText: string): Promise<void> {
+    async function handleSearch(searchText: string): Promise<Options | undefined> {
+        let optionSet: Options;
         if (setIsLoading !== undefined) {
             setIsLoading(true);
             const searchResult = await getCityAutoComplete(searchText);
             if (!searchResult.length) {
                 return;
             }
-            const optionSet: Options = searchResult.map((result) => {
+            optionSet = searchResult.map((result) => {
                 return { value: result.name };
             });
             setOptions(optionSet);
             setIsLoading(false);
+        } else {
+            const searchResult = await getCityAutoComplete(searchText);
+            if (!searchResult.length) {
+                return;
+            }
+            optionSet = searchResult.map((result) => {
+                return { value: result.name };
+            });
+            setOptions(optionSet);
         }
+        return optionSet;
     }
-
-    async function handleSearch(searchText: string): Promise<void> {
-        const searchResult = await getCityAutoComplete(searchText);
-        if (!searchResult.length) {
-            return;
-        }
-        const optionSet: Options = searchResult.map((result) => {
-            return { value: result.name };
-        });
-        setOptions(optionSet);
-    }
-
     return (
         <AutoComplete
             options={options}
             onChange={onChange}
-            onSearch={setIsLoading ? handleSearchWithLoading : handleSearch}
+            onSearch={handleSearch}
             className={className}
             filterOption
             allowClear

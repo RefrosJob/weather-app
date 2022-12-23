@@ -1,32 +1,40 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect } from 'react';
+import WebFont from 'webfontloader';
 import { AppPage } from './pages/MainPage/MainPage';
 import { GlobalStyles, Wrapper } from './AppStyle';
 import { AppRouter } from './components/AppRouter/AppRouter';
 import { AppRoutes } from './types/appRouter';
 import { useTheme } from './microservices/theme';
-import { ThemeProvider } from 'styled-components';
-import { Provider } from 'react-redux';
-import store from './store';
+import { DefaultTheme, ThemeProvider } from 'styled-components';
+import { useAppDispatch, useAppSelector } from './hooks';
+import { setTheme } from './stores/themeStore';
+
 function App(): JSX.Element {
     const routes: AppRoutes = [{ path: '/', component: <AppPage /> }];
-    const { theme, themeLoaded } = useTheme();
-    const [selectedTheme, setSelectedTheme] = useState(theme);
+    const { theme, themeLoaded, getFonts } = useTheme();
+    const dispatch = useAppDispatch();
+    const selectedTheme = useAppSelector((state) => state.theme.value || theme);
+    const setSelectedTheme = (theme: DefaultTheme) => dispatch(setTheme(theme));
 
     useEffect(() => {
         setSelectedTheme(theme);
     }, [themeLoaded]);
 
+    useEffect(() => {
+        WebFont.load({
+            google: {
+                families: getFonts(),
+            },
+        });
+    });
     return (
         <>
-            {themeLoaded && (
+            {themeLoaded && selectedTheme.colors && (
                 <ThemeProvider theme={selectedTheme}>
-                    <Provider store={store}>
-                        <GlobalStyles />
-                        <Wrapper>
-                            <AppRouter routes={routes} />
-                        </Wrapper>
-                    </Provider>
+                    <GlobalStyles />
+                    <Wrapper>
+                        <AppRouter routes={routes} />
+                    </Wrapper>
                 </ThemeProvider>
             )}
         </>

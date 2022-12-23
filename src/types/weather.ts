@@ -138,11 +138,18 @@ interface Condition {
     code: number;
 }
 
-export type Format = FormatTypes.Celcius | FormatTypes.Fahrenheit;
+export type TempFormat = TempFormatTypes.Celcius | TempFormatTypes.Fahrenheit;
 
-export enum FormatTypes {
+export type SpeedFormat = SpeedFormatTypes.Miles | SpeedFormatTypes.Kilometers;
+
+export enum TempFormatTypes {
     Celcius = 'Celcius',
     Fahrenheit = 'Fahrenheit',
+}
+
+export enum SpeedFormatTypes {
+    Miles = 'Miles',
+    Kilometers = 'Kilometers',
 }
 
 type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N

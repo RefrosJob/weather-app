@@ -1,9 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import format from './stores/formatStore';
+import tempFormat from './stores/tempFormatStore';
+import speedFormat from './stores/speedFormatStore';
+import city from './stores/cityStore';
+import theme from './stores/themeStore';
 
 const store = configureStore({
     reducer: {
-        format,
+        tempFormat,
+        speedFormat,
+        city,
+        theme,
     },
 });
 

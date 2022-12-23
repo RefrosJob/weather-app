@@ -4,16 +4,12 @@
             "id": "T_001",
             "name": "Light Mode",
             "colors": {
-                "body": "#FFFFFF",
-                "text": "#000000",
-                "button": {
-                    "text": "#FFFFFF",
-                    "background": "#000000"
-                },
-                "link": {
-                    "text": "teal",
-                    "opacity": 1
-                }
+                "header": "#6fc5fc",
+                "body": "#a1daff",
+                "bodyAccent": "#8cd2ff",
+                "bodyAccent2": "#c0e3fa",
+                "text": "#2b3942",
+                "textAccent": "#213440"
             },
             "font": "Tinos"
         },
@@ -21,16 +17,12 @@
             "id": "T_007",
             "name": "Dark Mode",
             "colors": {
-                "body": "#0e142e",
-                "text": "#FFFFFF",
-                "button": {
-                    "text": "#ffffff",
-                    "background": "#0d47a1"
-                },
-                "link": {
-                    "text": "#0d47a1",
-                    "opacity": 0.8
-                }
+                "header": "#0e142e",
+                "body": "#263163",
+                "bodyAccent": "#394785",
+                "bodyAccent2": "#344aad",
+                "text": "#edf1ff",
+                "textAccent": "#d2dafc"
             },
             "font": "Ubuntu"
         }

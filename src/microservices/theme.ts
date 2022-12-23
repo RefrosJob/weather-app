@@ -5,11 +5,12 @@ import { setToLS, getFromLS } from './storage';
 
 export function useTheme(): UseTheme {
     const themes = getFromLS<FullTheme>('all-themes');
-    const [theme, setTheme] = useState(themes.data.light as DefaultTheme);
+    const [theme, setTheme] = useState({} as DefaultTheme);
     const [themeLoaded, setThemeLoaded] = useState(false);
 
     useEffect(() => {
         const localTheme = getFromLS<DefaultTheme>('theme');
+        console.log('first theme loaded', localTheme);
         if (localTheme?.colors) {
             setTheme(localTheme);
         } else {

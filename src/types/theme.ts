@@ -17,18 +17,10 @@ export interface FullTheme {
 }
 
 interface Colors {
+    header: string;
     body: string;
+    bodyAccent: string;
+    bodyAccent2: string;
     text: string;
-    button: Button;
-    link: Link;
-}
-
-interface Button {
-    text: string;
-    background: string;
-}
-
-interface Link {
-    text: string;
-    opacity: number;
+    textAccent: string;
 }

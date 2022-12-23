@@ -18,19 +18,6 @@ export const Wrapper = styled.div`
         margin-top: 1em;
         padding-top: 1em;
         border-top: 1px solid lightgray;
-        background: lavender;
-    }
-
-    .loading-icon {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        font-size: 10em;
-        color: blue;
-    }
-
-    .full-width {
-        width: 100%;
     }
 
     .full-height {
@@ -46,20 +33,20 @@ export const Wrapper = styled.div`
     }
 
     .weather-main-card {
-        height: 7rem;
+        height: 8rem;
         border-radius: 1rem;
         transition: height 0.3s ease-out;
-        background-color: #dadafb;
+        border: 0px;
     }
 
+    .weather-inner-card {
+        animation: fadeIn 2s;
+        border: 0px;
+    }
     .weather-current-input {
         min-height: 4rem;
         font-size: 1rem;
         border-radius: 0.6rem;
-        /* background-color: rgba(0, 0, 0, 0.1);
-        input {
-            background-color: rgba(0, 0, 0, 0.01);
-        } */
     }
 
     .weather-card-condition-icon {
@@ -67,13 +54,12 @@ export const Wrapper = styled.div`
     }
 
     .weather-grow {
-        height: 55rem;
+        height: 48rem;
         transition: height 0.3s ease-out;
     }
 
     .weather-card-fade-in {
         animation: fadeIn 2s;
-        background-color: lavender;
         border: 0px;
     }
 
@@ -82,7 +68,15 @@ export const Wrapper = styled.div`
     }
 
     .content-tab {
-        background: lavender;
-        border: 0px solid black;
+        border: 0px;
+    }
+
+    .weather-carousel-tabs {
+        border-radius: 0.5rem;
+        height: 19.5rem;
+        .ant-tabs-nav {
+            border-radius: 0.5rem 0.5rem 0 0;
+            padding: 0 1rem 0 1rem;
+        }
     }
 `;

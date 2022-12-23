@@ -4,6 +4,19 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
 
+    .settings-button {
+        height: 3rem;
+        width: 3rem;
+        font-size: 1.3rem;
+    }
+
+    .header-settings-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+    }
+
     .app-header-logo {
         height: 100%;
         align-content: flex-start;
